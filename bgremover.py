@@ -5,12 +5,24 @@ import io
 import time
 
 
-st.markdown(
-    "<h1 style='text-align: center; color: #ecd07c; font-size: 42px; white-space: nowrap;'>✨ ClearCut - Background Remover ✨</h1>", 
-    unsafe_allow_html=True
-)
+st.markdown("""
+    <style>
+    h1 {
+        text-align: center;
+        color: #ecd07c;
+        font-size: 39px;
+        white-space: normal; /* Allow wrapping on smaller screens */
+        margin: 0;
+    }
 
-st.markdown("<p style='text-align: center; color: #999999;'>Bring Focus to Your Photos by Making Backgrounds Disappear!</p>", unsafe_allow_html=True)
+    p {
+        text-align: center;
+        color: #999999;
+    }
+    </style>
+    <h1>✨ ClearCut - Background Remover ✨</h1>
+    <p>Bring Focus to Your Photos by Making Backgrounds Disappear!</p>
+""", unsafe_allow_html=True)
 
 
 col1, col2 = st.columns(2)
@@ -35,7 +47,7 @@ if uploaded_file is not None:
         col2.image(output, caption="Without Background", use_column_width=True)
     
     st.success("Background removed successfully! 🎉")
-    st.balloons()
+    
 
    
     output_io = io.BytesIO()
@@ -46,7 +58,7 @@ if uploaded_file is not None:
     col2.download_button(
         label="Download Image without Background",
         data=output_io,
-        file_name="ClearCut.png",
+        file_name=f"{uploaded_file.name.split('.')[0]}_ClearCut.png",
         mime="image/png"
     )
 else:
